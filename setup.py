@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='whop',
-    version='1.0',
+    version='2.0',
     license='MIT',
     author="Whop",
     author_email='support@whop.com',
-    packages=find_packages('whop'),
-    package_dir={'': 'whop'},
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     url='https://github.com/whopio/whop-python-sdk',
     keywords='whop',
     install_requires=[
