@@ -35,12 +35,10 @@ def lazy_import():
     from whop.whopclient.model.license_discord import LicenseDiscord
     from whop.whopclient.model.license_plan import LicensePlan
     from whop.whopclient.model.license_twitter import LicenseTwitter
-    from whop.whopclient.model.metadata import Metadata
     globals()['License'] = License
     globals()['LicenseDiscord'] = LicenseDiscord
     globals()['LicensePlan'] = LicensePlan
     globals()['LicenseTwitter'] = LicenseTwitter
-    globals()['Metadata'] = Metadata
 
 
 class ValidateLicenseByKeyResponse(ModelComposed):
@@ -124,7 +122,7 @@ class ValidateLicenseByKeyResponse(ModelComposed):
             'subscription_status': (str, none_type,),  # noqa: E501
             'quantity': (int, none_type,),  # noqa: E501
             'banned': (bool, none_type,),  # noqa: E501
-            'metadata': (Metadata,),  # noqa: E501
+            'metadata': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
             'next_renewal_date': (str, none_type,),  # noqa: E501
             'renewal_period': (int, none_type,),  # noqa: E501
             'created_at': (str, none_type,),  # noqa: E501
@@ -209,7 +207,7 @@ class ValidateLicenseByKeyResponse(ModelComposed):
             subscription_status (str, none_type): [optional]  # noqa: E501
             quantity (int, none_type): [optional]  # noqa: E501
             banned (bool, none_type): [optional]  # noqa: E501
-            metadata (Metadata): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
             next_renewal_date (str, none_type): [optional]  # noqa: E501
             renewal_period (int, none_type): [optional]  # noqa: E501
             created_at (str, none_type): [optional]  # noqa: E501
@@ -326,7 +324,7 @@ class ValidateLicenseByKeyResponse(ModelComposed):
             subscription_status (str, none_type): [optional]  # noqa: E501
             quantity (int, none_type): [optional]  # noqa: E501
             banned (bool, none_type): [optional]  # noqa: E501
-            metadata (Metadata): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
             next_renewal_date (str, none_type): [optional]  # noqa: E501
             renewal_period (int, none_type): [optional]  # noqa: E501
             created_at (str, none_type): [optional]  # noqa: E501

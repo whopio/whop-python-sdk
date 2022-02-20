@@ -22,12 +22,10 @@ from whop.whopclient.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from whop.whopclient.model.ban_license_by_key_request import BanLicenseByKeyRequest
 from whop.whopclient.model.ban_license_by_key_response import BanLicenseByKeyResponse
 from whop.whopclient.model.error_response import ErrorResponse
 from whop.whopclient.model.get_license_by_key_response import GetLicenseByKeyResponse
 from whop.whopclient.model.get_licenses_response import GetLicensesResponse
-from whop.whopclient.model.reset_license_by_key_request import ResetLicenseByKeyRequest
 from whop.whopclient.model.reset_license_by_key_response import ResetLicenseByKeyResponse
 from whop.whopclient.model.update_license_by_key_request import UpdateLicenseByKeyRequest
 from whop.whopclient.model.update_license_by_key_response import UpdateLicenseByKeyResponse
@@ -60,7 +58,6 @@ class LicensesApi(object):
             params_map={
                 'all': [
                     'key',
-                    'ban_license_by_key_request',
                 ],
                 'required': [
                     'key',
@@ -80,15 +77,12 @@ class LicensesApi(object):
                 'openapi_types': {
                     'key':
                         (str,),
-                    'ban_license_by_key_request':
-                        (BanLicenseByKeyRequest,),
                 },
                 'attribute_map': {
                     'key': 'key',
                 },
                 'location_map': {
                     'key': 'path',
-                    'ban_license_by_key_request': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -97,9 +91,7 @@ class LicensesApi(object):
                 'accept': [
                     'application/json'
                 ],
-                'content_type': [
-                    'application/json'
-                ]
+                'content_type': [],
             },
             api_client=api_client
         )
@@ -107,7 +99,8 @@ class LicensesApi(object):
             settings={
                 'response_type': (GetLicenseByKeyResponse,),
                 'auth': [
-                    'Bearer'
+                    'Bearer',
+                    'ClientID'
                 ],
                 'endpoint_path': '/v1/licenses/{key}',
                 'operation_id': 'get_license_by_key',
@@ -222,7 +215,8 @@ class LicensesApi(object):
             settings={
                 'response_type': (ResetLicenseByKeyResponse,),
                 'auth': [
-                    'Bearer'
+                    'Bearer',
+                    'ClientID'
                 ],
                 'endpoint_path': '/v1/licenses/{key}/reset',
                 'operation_id': 'reset_license_by_key',
@@ -232,7 +226,6 @@ class LicensesApi(object):
             params_map={
                 'all': [
                     'key',
-                    'reset_license_by_key_request',
                 ],
                 'required': [
                     'key',
@@ -252,15 +245,12 @@ class LicensesApi(object):
                 'openapi_types': {
                     'key':
                         (str,),
-                    'reset_license_by_key_request':
-                        (ResetLicenseByKeyRequest,),
                 },
                 'attribute_map': {
                     'key': 'key',
                 },
                 'location_map': {
                     'key': 'path',
-                    'reset_license_by_key_request': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -269,9 +259,7 @@ class LicensesApi(object):
                 'accept': [
                     'application/json'
                 ],
-                'content_type': [
-                    'application/json'
-                ]
+                'content_type': [],
             },
             api_client=api_client
         )
@@ -279,7 +267,8 @@ class LicensesApi(object):
             settings={
                 'response_type': (UpdateLicenseByKeyResponse,),
                 'auth': [
-                    'Bearer'
+                    'Bearer',
+                    'ClientID'
                 ],
                 'endpoint_path': '/v1/licenses/{key}',
                 'operation_id': 'update_license_by_key',
@@ -336,7 +325,8 @@ class LicensesApi(object):
             settings={
                 'response_type': (ValidateLicenseByKeyResponse,),
                 'auth': [
-                    'Bearer'
+                    'Bearer',
+                    'ClientID'
                 ],
                 'endpoint_path': '/v1/licenses/{key}/validate',
                 'operation_id': 'validate_license_by_key',
@@ -407,7 +397,6 @@ class LicensesApi(object):
             key (str): Key of the license you wish to ban.
 
         Keyword Args:
-            ban_license_by_key_request (BanLicenseByKeyRequest): Details of license key metadata.. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -617,7 +606,6 @@ class LicensesApi(object):
             key (str): Key of the license you wish to reset.
 
         Keyword Args:
-            reset_license_by_key_request (ResetLicenseByKeyRequest): Details of license key metadata.. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

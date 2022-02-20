@@ -78,6 +78,25 @@ class Configuration(object):
       in PEM format
 
     :Example:
+
+    API Key Authentication Example.
+    Given the following security scheme in the OpenAPI specification:
+      components:
+        securitySchemes:
+          cookieAuth:         # name for the security scheme
+            type: apiKey
+            in: cookie
+            name: JSESSIONID  # cookie name
+
+    You can programmatically set the cookie:
+
+conf = whop.whopclient.Configuration(
+    api_key={'cookieAuth': 'abc123'}
+    api_key_prefix={'cookieAuth': 'JSESSIONID'}
+)
+
+    The following cookie will be added to the HTTP request:
+       Cookie: JSESSIONID abc123
     """
 
     _default = None
@@ -134,7 +153,7 @@ class Configuration(object):
         self.logger = {}
         """Logging Settings
         """
-        self.logger["package_logger"] = logging.getLogger("whopclient")
+        self.logger["package_logger"] = logging.getLogger("whop.whopclient")
         self.logger["urllib3_logger"] = logging.getLogger("urllib3")
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
         """Log format
@@ -377,6 +396,15 @@ class Configuration(object):
                 'in': 'header',
                 'key': 'Authorization',
                 'value': 'Bearer ' + self.access_token
+            }
+        if 'ClientID' in self.api_key:
+            auth['ClientID'] = {
+                'type': 'api_key',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': self.get_api_key_with_prefix(
+                    'ClientID',
+                ),
             }
         return auth
 

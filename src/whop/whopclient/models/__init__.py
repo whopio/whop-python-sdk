@@ -9,7 +9,6 @@
 # import sys
 # sys.setrecursionlimit(n)
 
-from whop.whopclient.model.ban_license_by_key_request import BanLicenseByKeyRequest
 from whop.whopclient.model.ban_license_by_key_response import BanLicenseByKeyResponse
 from whop.whopclient.model.checkout_log import CheckoutLog
 from whop.whopclient.model.confirm_product_request import ConfirmProductRequest
@@ -33,14 +32,11 @@ from whop.whopclient.model.license_discord import LicenseDiscord
 from whop.whopclient.model.license_plan import LicensePlan
 from whop.whopclient.model.license_twitter import LicenseTwitter
 from whop.whopclient.model.link import Link
-from whop.whopclient.model.metadata import Metadata
 from whop.whopclient.model.product import Product
-from whop.whopclient.model.reset_license_by_key_request import ResetLicenseByKeyRequest
 from whop.whopclient.model.reset_license_by_key_response import ResetLicenseByKeyResponse
 from whop.whopclient.model.send_push_notification_request import SendPushNotificationRequest
 from whop.whopclient.model.send_push_notification_response import SendPushNotificationResponse
 from whop.whopclient.model.update_license_by_key_request import UpdateLicenseByKeyRequest
-from whop.whopclient.model.update_license_by_key_request_metadata import UpdateLicenseByKeyRequestMetadata
 from whop.whopclient.model.update_license_by_key_response import UpdateLicenseByKeyResponse
 from whop.whopclient.model.validate_license_by_key_request import ValidateLicenseByKeyRequest
 from whop.whopclient.model.validate_license_by_key_response import ValidateLicenseByKeyResponse

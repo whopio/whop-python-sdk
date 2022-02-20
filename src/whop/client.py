@@ -1,27 +1,29 @@
 import whop.whopclient as whopclient
 from whop.whopclient.api import (
+    checkout_logs_api,
     products_api,
     notifications_api,
     links_api,
     licenses_api,
-    checkout_logs_api,
 )
 
 
 from whop.whopclient.model.create_product_request import CreateProductRequest
 from whop.whopclient.model.confirm_product_request import ConfirmProductRequest
-from whop.whopclient.model.send_push_notification_request import SendPushNotificationRequest
+from whop.whopclient.model.send_push_notification_request import (
+    SendPushNotificationRequest,
+)
 
 from whop.whopclient.model.create_link_request import CreateLinkRequest
-from whop.whopclient.model.validate_license_by_key_request import ValidateLicenseByKeyRequest
-from whop.whopclient.model.update_license_by_key_request import UpdateLicenseByKeyRequest
-from whop.whopclient.model.reset_license_by_key_request import ResetLicenseByKeyRequest
+from whop.whopclient.model.validate_license_by_key_request import (
+    ValidateLicenseByKeyRequest,
+)
+from whop.whopclient.model.update_license_by_key_request import (
+    UpdateLicenseByKeyRequest,
+)
 
-
-from whop.whopclient.model.ban_license_by_key_request import BanLicenseByKeyRequest
 
 from whop.whopclient.model.create_checkout_log_request import CreateCheckoutLogRequest
-from whop.whopclient.model.create_link_request import CreateLinkRequest
 from whop.whopclient.model.error_response import ErrorResponse
 from whop.static.internal_utils import _remove_none_values
 from typing import Optional
@@ -29,9 +31,12 @@ import json
 
 
 class Whop:
-    def __init__(self, bearer):
+    def __init__(self, bearer=None, client_id=None):
+        api_key = {}
+        if client_id:
+            api_key["ClientID"] = client_id
         self.api_client = whopclient.ApiClient(
-            whopclient.Configuration(access_token=bearer)
+            whopclient.Configuration(access_token=bearer, api_key=api_key)
         )
 
     def get_products(self, **kwargs):
@@ -44,9 +49,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def get_product_by_id(self, id: int, **kwargs):
@@ -59,41 +64,41 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def create_product(
         self,
-        custom_trial_period: Optional[int] = None,
-        expiration_days: Optional[int] = None,
-        initial_price: Optional[float] = None,
-        license_type: Optional[str] = None,
         title: Optional[str] = None,
-        currency: Optional[str] = None,
-        cancel_action: Optional[str] = None,
-        price: Optional[float] = None,
-        stock: Optional[int] = None,
         transferable: Optional[bool] = None,
         billing_period: Optional[int] = None,
+        custom_trial_period: Optional[int] = None,
+        license_type: Optional[str] = None,
+        price: Optional[float] = None,
+        stock: Optional[int] = None,
+        cancel_action: Optional[str] = None,
+        currency: Optional[str] = None,
+        expiration_days: Optional[int] = None,
+        initial_price: Optional[float] = None,
         **kwargs
     ):
         # Create Product
         try:
             client = whopclient.api.products_api.ProductsApi(self.api_client)
             body_kwargs = {
-                "custom_trial_period": custom_trial_period,
-                "expiration_days": expiration_days,
-                "initial_price": initial_price,
-                "license_type": license_type,
                 "title": title,
-                "currency": currency,
-                "cancel_action": cancel_action,
-                "price": price,
-                "stock": stock,
                 "transferable": transferable,
                 "billing_period": billing_period,
+                "custom_trial_period": custom_trial_period,
+                "license_type": license_type,
+                "price": price,
+                "stock": stock,
+                "cancel_action": cancel_action,
+                "currency": currency,
+                "expiration_days": expiration_days,
+                "initial_price": initial_price,
             }
 
             body_kwargs = _remove_none_values(body_kwargs)
@@ -104,23 +109,23 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def confirm_product(
         self,
-        billing_period: Optional[int] = None,
         cancel_action: Optional[str] = None,
-        custom_trial_period: Optional[int] = None,
         initial_price: Optional[float] = None,
-        title: Optional[str] = None,
-        currency: Optional[str] = None,
-        expiration_days: Optional[int] = None,
         license_type: Optional[str] = None,
         price: Optional[float] = None,
         stock: Optional[int] = None,
+        billing_period: Optional[int] = None,
+        currency: Optional[str] = None,
+        custom_trial_period: Optional[int] = None,
+        expiration_days: Optional[int] = None,
+        title: Optional[str] = None,
         transferable: Optional[bool] = None,
         **kwargs
     ):
@@ -128,16 +133,16 @@ class Whop:
         try:
             client = whopclient.api.products_api.ProductsApi(self.api_client)
             body_kwargs = {
-                "billing_period": billing_period,
                 "cancel_action": cancel_action,
-                "custom_trial_period": custom_trial_period,
                 "initial_price": initial_price,
-                "title": title,
-                "currency": currency,
-                "expiration_days": expiration_days,
                 "license_type": license_type,
                 "price": price,
                 "stock": stock,
+                "billing_period": billing_period,
+                "currency": currency,
+                "custom_trial_period": custom_trial_period,
+                "expiration_days": expiration_days,
+                "title": title,
                 "transferable": transferable,
             }
 
@@ -149,9 +154,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def send_push_notification(
@@ -180,9 +185,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def get_links(self, **kwargs):
@@ -195,9 +200,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def create_link(
@@ -226,9 +231,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def validate_license_by_key(
@@ -251,9 +256,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def update_license_by_key(
@@ -276,32 +281,24 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
-    def reset_license_by_key(self, key: str, metadata: Optional[dict] = None, **kwargs):
+    def reset_license_by_key(self, key: str, **kwargs):
         # Reset License
         try:
             client = whopclient.api.licenses_api.LicensesApi(self.api_client)
-            body_kwargs = {
-                "metadata": metadata,
-            }
 
-            body_kwargs = _remove_none_values(body_kwargs)
-            req = ResetLicenseByKeyRequest(**body_kwargs)
-
-            resp = client.reset_license_by_key(
-                key, reset_license_by_key_request=req, **kwargs
-            )
+            resp = client.reset_license_by_key(key, **kwargs)
             return resp
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def get_licenses(
@@ -331,9 +328,9 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def get_license_by_key(self, key: str, **kwargs):
@@ -346,32 +343,24 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
-    def ban_license_by_key(self, key: str, metadata: Optional[dict] = None, **kwargs):
+    def ban_license_by_key(self, key: str, **kwargs):
         # Ban License
         try:
             client = whopclient.api.licenses_api.LicensesApi(self.api_client)
-            body_kwargs = {
-                "metadata": metadata,
-            }
 
-            body_kwargs = _remove_none_values(body_kwargs)
-            req = BanLicenseByKeyRequest(**body_kwargs)
-
-            resp = client.ban_license_by_key(
-                key, ban_license_by_key_request=req, **kwargs
-            )
+            resp = client.ban_license_by_key(key, **kwargs)
             return resp
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def get_checkout_logs(
@@ -394,33 +383,33 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )
 
     def create_checkout_log(
         self,
-        image_url: Optional[str] = None,
         key: Optional[str] = None,
         price: Optional[float] = None,
         product_name: Optional[str] = None,
         size: Optional[int] = None,
         status: Optional[str] = None,
         website: Optional[str] = None,
+        image_url: Optional[str] = None,
         **kwargs
     ):
         # Add Checkout Log
         try:
             client = whopclient.api.checkout_logs_api.CheckoutLogsApi(self.api_client)
             body_kwargs = {
-                "image_url": image_url,
                 "key": key,
                 "price": price,
                 "product_name": product_name,
                 "size": size,
                 "status": status,
                 "website": website,
+                "image_url": image_url,
             }
 
             body_kwargs = _remove_none_values(body_kwargs)
@@ -431,7 +420,7 @@ class Whop:
         except Exception as e:
             err_resp = json.loads(e.body)
             return ErrorResponse(
-                success=err_resp["success"],
-                message=err_resp["message"],
-                errors=err_resp["errors"],
+                success=err_resp.get("success", None),
+                message=err_resp.get("message", None),
+                errors=err_resp.get("errors", None),
             )

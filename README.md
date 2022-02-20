@@ -10,7 +10,7 @@ pip install whop
 import whop
 
 bearer = "<Bearer Token>"
-client = whop.Whop(bearer)
+client = whop.Whop(bearer=bearer)
 
 # Create a password protected link for your product.
 client.create_link(

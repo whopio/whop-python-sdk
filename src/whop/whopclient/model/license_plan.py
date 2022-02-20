@@ -89,8 +89,8 @@ class LicensePlan(ModelNormal):
         return {
             'id': (int, none_type,),  # noqa: E501
             'title': (str, none_type,),  # noqa: E501
-            'initial_price': (int, none_type,),  # noqa: E501
-            'renewal_price': (int, none_type,),  # noqa: E501
+            'initial_price': (float, none_type,),  # noqa: E501
+            'renewal_price': (float, none_type,),  # noqa: E501
             'billing_period': (int, none_type,),  # noqa: E501
             'license_type': (str, none_type,),  # noqa: E501
         }
@@ -152,8 +152,8 @@ class LicensePlan(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (int, none_type): [optional]  # noqa: E501
             title (str, none_type): [optional]  # noqa: E501
-            initial_price (int, none_type): [optional]  # noqa: E501
-            renewal_price (int, none_type): [optional]  # noqa: E501
+            initial_price (float, none_type): [optional]  # noqa: E501
+            renewal_price (float, none_type): [optional]  # noqa: E501
             billing_period (int, none_type): [optional]  # noqa: E501
             license_type (str, none_type): [optional]  # noqa: E501
         """
@@ -239,8 +239,8 @@ class LicensePlan(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (int, none_type): [optional]  # noqa: E501
             title (str, none_type): [optional]  # noqa: E501
-            initial_price (int, none_type): [optional]  # noqa: E501
-            renewal_price (int, none_type): [optional]  # noqa: E501
+            initial_price (float, none_type): [optional]  # noqa: E501
+            renewal_price (float, none_type): [optional]  # noqa: E501
             billing_period (int, none_type): [optional]  # noqa: E501
             license_type (str, none_type): [optional]  # noqa: E501
         """

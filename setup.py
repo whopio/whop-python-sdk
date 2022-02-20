@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='whop',
-    version='2.0',
+    version='3.0',
     license='MIT',
     author="Whop",
     author_email='support@whop.com',
