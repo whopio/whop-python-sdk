@@ -87,7 +87,7 @@ class Link(ModelNormal):
             'password': (str, none_type,),  # noqa: E501
             'stock': (int, none_type,),  # noqa: E501
             'created_at': (str, none_type,),  # noqa: E501
-            'discord_ids': ([str, none_type], none_type,),  # noqa: E501
+            'discord_ids': (str, none_type,),  # noqa: E501
             'hidden': (bool, none_type,),  # noqa: E501
         }
 
@@ -152,7 +152,7 @@ class Link(ModelNormal):
             password (str, none_type): [optional]  # noqa: E501
             stock (int, none_type): [optional]  # noqa: E501
             created_at (str, none_type): [optional]  # noqa: E501
-            discord_ids ([str, none_type], none_type): [optional]  # noqa: E501
+            discord_ids (str, none_type): [optional]  # noqa: E501
             hidden (bool, none_type): [optional]  # noqa: E501
         """
 
@@ -240,7 +240,7 @@ class Link(ModelNormal):
             password (str, none_type): [optional]  # noqa: E501
             stock (int, none_type): [optional]  # noqa: E501
             created_at (str, none_type): [optional]  # noqa: E501
-            discord_ids ([str, none_type], none_type): [optional]  # noqa: E501
+            discord_ids (str, none_type): [optional]  # noqa: E501
             hidden (bool, none_type): [optional]  # noqa: E501
         """
 
