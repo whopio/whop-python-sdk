@@ -83,6 +83,7 @@ class GetLicenseByKeyResponse(ModelComposed):
             'ACTIVE': "active",
             'TRIALING': "trialing",
             'CANCELED': "canceled",
+            'PAST_DUE': "past_due",
         },
     }
 
