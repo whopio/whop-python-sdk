@@ -81,6 +81,7 @@ class License(ModelNormal):
             'ACTIVE': "active",
             'TRIALING': "trialing",
             'CANCELED': "canceled",
+            'PAST_DUE': "past_due",
         },
     }
 
